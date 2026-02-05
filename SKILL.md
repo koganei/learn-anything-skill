@@ -309,11 +309,11 @@ Next topic research includes:
 
 ### Step 2: Research the Subject
 
-**CRITICAL: Research must be VERY DETAILED and EXTENSIVE.** The research document is the foundation for all learning content and must be comprehensive enough to support deep, tailored teaching.
+**CRITICAL: Research must be comprehensive and thorough.** The research document is the foundation for all learning content and must cover the subject completely to support deep, tailored teaching.
 
 Use the Task tool with subagent_type="general-purpose" to spawn research agents that will:
 
-- Search the web exhaustively for comprehensive, current information about the subject
+- Search the web for comprehensive, current information about the subject
 - Identify ALL key concepts, patterns, and best practices at every level
 - Gather extensive real-world examples and use cases
 - Find common learning paths and progression patterns
@@ -324,17 +324,18 @@ Use the Task tool with subagent_type="general-purpose" to spawn research agents 
 - Gather authoritative sources and recent discussions
 
 **Research Quality Target:**
-- **Minimum length:** 500-1000 lines of detailed content
-- **Depth:** Each concept should have multi-paragraph explanations with examples
+- **Depth:** Each concept should have clear, multi-paragraph explanations with examples
 - **Breadth:** Cover foundations, intermediate, advanced, and use-case scenarios comprehensively
 - **Sources:** Include extensive links to official docs, tutorials, articles, discussions
 - **Current:** Emphasize 2025-2026 best practices and recent changes
+- **Completeness:** Cover the topic thoroughly - length should match complexity (simple topics may need less, complex topics more)
+- **No padding:** Focus on quality and comprehensiveness, not hitting a line count
 
 **Research prompt template:**
 ```
-Research [SUBJECT] VERY COMPREHENSIVELY for creating a structured learning guide.
+Research [SUBJECT] comprehensively for creating a structured learning guide.
 
-**IMPORTANT:** Your research output must be EXTENSIVE and DETAILED (500-1000+ lines). This research will be the foundation for teaching, so it needs to be thorough enough to support deep, personalized instruction.
+**IMPORTANT:** Your research output must be thorough and complete. This research will be the foundation for teaching, so cover all essential concepts, patterns, and use cases. Quality and completeness matter more than length - write as much as needed to cover the subject properly, without artificial padding.
 
 Your research should be structured as follows:
 
@@ -395,7 +396,7 @@ For each numbered topic, provide:
 - Key concepts it covers
 - Why it matters
 
-Include EXTENSIVE details, code examples, patterns, and explanations throughout. This research should be comprehensive enough that someone could create detailed teaching content from it without additional research.
+Include thorough details, code examples, patterns, and explanations throughout. This research should be comprehensive enough that someone could create detailed teaching content from it without additional research. Write as much as needed to cover the subject completely - no more, no less.
 ```
 
 ### Step 3: Structure the Learning Path (Topics) and Save Research
@@ -466,10 +467,10 @@ After organizing the topics, save the learning path structure to `~/.claude-lear
 }
 ```
 
-Also save the DETAILED research to `~/.claude-learn-skill/[subject-slug]/research/initial_research.md` for future reference.
+Also save the comprehensive research to `~/.claude-learn-skill/[subject-slug]/research/initial_research.md` for future reference.
 
-**CRITICAL: Research document must be VERY DETAILED (500-1000+ lines).** This is not a summary - it's a comprehensive knowledge base that will inform all teaching. Include:
-- Extensive explanations for every concept
+**CRITICAL: Research document must be thorough and complete.** This is not a summary - it's a comprehensive knowledge base that will inform all teaching. Include:
+- Clear, thorough explanations for every concept
 - Multiple code examples with detailed walkthroughs
 - Common patterns and anti-patterns
 - Real-world scenarios and use cases
@@ -477,6 +478,7 @@ Also save the DETAILED research to `~/.claude-learn-skill/[subject-slug]/researc
 - Modern best practices (2025-2026)
 - Edge cases and gotchas
 - Tool ecosystem and integrations
+- **Quality over quantity:** Write as much as needed to fully cover the subject - complex topics will naturally be longer, simpler topics shorter
 
 Initialize the progress file at `~/.claude-learn-skill/[subject-slug]/progress.json`:
 
@@ -551,19 +553,20 @@ When the user selects a topic (by number, name, or description):
 
 #### Topic-Level Research (Per Topic)
 
-**CRITICAL: Each topic requires its own DETAILED research that is personalized to the user's context.**
+**CRITICAL: Each topic requires its own thorough research that is personalized to the user's context.**
 
 When starting a new topic, spawn a research agent to create topic-specific research that:
 - Is saved to `research/topic_[NN]_[topic-name]_research.md`
-- Is 200-500+ lines of detailed, focused content on this ONE topic
+- Provides detailed, focused content on this ONE topic (length should match topic complexity)
 - Takes into account everything known about the user from user_context.md
 - Provides deep coverage of this specific topic (not breadth across the subject)
+- Focuses on completeness and quality rather than hitting a specific length
 
 **Topic Research Prompt Template:**
 ```
-Research Topic [NN]: [TOPIC NAME] within [SUBJECT] in detail for personalized teaching.
+Research Topic [NN]: [TOPIC NAME] within [SUBJECT] thoroughly for personalized teaching.
 
-**IMPORTANT:** This research is for ONE specific topic within the broader subject. It must be DETAILED (200-500+ lines) and PERSONALIZED based on the user's context.
+**IMPORTANT:** This research is for ONE specific topic within the broader subject. It must be thorough, complete, and PERSONALIZED based on the user's context. Write as much as needed to fully cover this topic - no more, no less.
 
 ## USER CONTEXT (use this to personalize the research):
 [Include relevant sections from user_context.md here - this contains ALL previous conversation details:]
@@ -649,7 +652,7 @@ Design exercises that:
 - Tools and libraries specific to this topic
 
 **Output Format:**
-Structure the research as a comprehensive markdown document with clear sections, extensive code examples, detailed explanations, and explicit connections to the user's context wherever possible. This research will be used to create a highly personalized teaching experience.
+Structure the research as a comprehensive markdown document with clear sections, thorough code examples, detailed explanations, and explicit connections to the user's context wherever possible. Write enough to fully cover the topic - quality and completeness matter more than length. This research will be used to create a highly personalized teaching experience.
 ```
 
 **After topic research is complete:**
@@ -1133,32 +1136,34 @@ Help the user navigate their learning journey based on progress:
 
 ### Research Quality
 
-**CRITICAL: Research happens at TWO levels, both must be VERY DETAILED**
+**CRITICAL: Research happens at TWO levels, both must be thorough and complete**
 
 **Subject-Level Research (Step 2):**
 - Initial comprehensive research when starting a new subject
-- 500-1000+ lines covering the entire subject
+- Covers the entire subject with appropriate depth (length matches subject complexity)
 - Broad overview of all concepts, patterns, and use cases
 - Saved to `research/initial_research.md`
 - Forms the foundation for structuring the learning path
 
 **Topic-Level Research (Step 5):**
 - Detailed research for EACH individual topic before teaching it
-- 200-500+ lines focusing deeply on ONE topic
+- Focuses deeply on ONE topic (length should match topic complexity)
 - **PERSONALIZED based on user_context.md**
 - Includes examples relevant to user's projects, tools, and goals
 - Saved to `research/topic_[NN]_[name]_research.md`
 - Used to create highly tailored topic guides and teaching
 
 **Quality Standards (Both Levels):**
+- **Completeness over length:** Cover everything needed, avoid padding
 - Use current information (2025-2026 best practices)
 - Prioritize official documentation and authoritative sources
-- Include extensive practical, real-world examples with detailed explanations
+- Include practical, real-world examples with clear explanations
 - Focus on actionable information with comprehensive coverage
-- Provide multi-paragraph explanations for each concept
+- Provide clear, multi-paragraph explanations for each concept
 - Include code examples, patterns, anti-patterns, and edge cases
-- Document tools, ecosystem, and integrations thoroughly
+- Document tools, ecosystem, and integrations as relevant
 - Capture best practices, common mistakes, and optimization techniques
+- **Simple topics = shorter research, complex topics = longer research**
 
 ### User Context Tracking & Conversation Recording
 
@@ -1295,9 +1300,9 @@ Assistant: That's not in the original 17 topics, but I can research it for you.
 **If user asks for a topic not in the saved learning path:**
 - Check existing research first to see if it can be covered
 - Read user_context.md to understand why they're interested in this additional topic (update with this context)
-- If truly new/different, spawn a research agent to gather DETAILED information on that specific topic
+- If truly new/different, spawn a research agent to gather thorough information on that specific topic
 - Create and save a new topic guide to `topics/` directory (e.g., `18_new-topic.md`)
-- Save additional research to `research/` directory (maintain detailed format, 200+ lines)
+- Save additional research to `research/` directory (comprehensive coverage matching topic complexity)
 - Optionally add it to the learning_path.json if it fits the subject
 - Update user_context.md with this interest and what drove it
 - Let user know this was additional topic research beyond the original path
@@ -1335,8 +1340,8 @@ Assistant: That's not in the original 17 topics, but I can research it for you.
 │   ├── progress.json                    # User's progress tracking
 │   ├── user_context.md                  # DETAILED user-specific learning context
 │   ├── research/
-│   │   ├── initial_research.md         # Subject-level: VERY DETAILED (500-1000+ lines)
-│   │   ├── topic_01_what-are-hooks_research.md      # Topic-level: DETAILED (200-500 lines)
+│   │   ├── initial_research.md         # Subject-level: comprehensive research
+│   │   ├── topic_01_what-are-hooks_research.md      # Topic-level: detailed research
 │   │   ├── topic_02_understanding-usestate_research.md
 │   │   └── topic_03_working-with-useeffect_research.md
 │   └── topics/
@@ -1370,8 +1375,8 @@ Assistant: That's not in the original 17 topics, but I can research it for you.
   - Update continuously throughout learning as user shares context (Step 6)
   - Update after each topic (individual learning unit) with observations (Step 6)
   - Update at end of each session with summary (Step 6)
-- **research/initial_research.md:** After subject-level research is completed (Step 2) - 500-1000+ lines
-- **research/topic_[NN]_[name]_research.md:** When starting each topic (Step 5) - 200-500+ lines, personalized to user
+- **research/initial_research.md:** After subject-level research is completed (Step 2) - comprehensive coverage
+- **research/topic_[NN]_[name]_research.md:** When starting each topic (Step 5) - thorough coverage, personalized to user
 - **topics/[NN]_*.md:** When first presenting a topic to the user, after topic research exists (Step 5)
 
 ### Updating vs. Creating
